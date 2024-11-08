@@ -1522,6 +1522,17 @@ class ChromiumRepo:
     def __init__(self, root_dir):
         self.root_dir = root_dir
         self.info = [self.FAKE_REV, self.FAKE_REV, {}]
+        self.config_files = []
+        if Util.HOST_OS == Util.WINDOWS:
+            self.config_files = [
+                'infra/config/generated/builders/try/dawn-win10-x64-deps-rel/targets/chromium.dawn.json',
+                'infra/config/generated/builders/try/gpu-fyi-try-win10-intel-rel-64/targets/chromium.gpu.fyi.json'
+            ]
+        elif Util.HOST_OS == Util.LINUX:
+            self.config_files = [
+                'infra/config/generated/builders/try/dawn-linux-x64-deps-rel/targets/chromium.dawn.json',
+                'infra/config/generated/builders/try/gpu-fyi-try-linux-intel-rel/targets/chromium.gpu.fyi.json'
+            ]
 
     def get_working_dir_date(self):
         Util.chdir(self.root_dir)
